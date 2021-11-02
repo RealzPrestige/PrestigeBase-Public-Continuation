@@ -2,7 +2,6 @@ package dev.prestige.base.event;
 
 import dev.prestige.base.PrestigeBase;
 import dev.prestige.base.event.events.DeathEvent;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -23,12 +22,9 @@ public class EventListener {
     @SubscribeEvent
     public void onTick(TickEvent.ClientTickEvent event) {
         PrestigeBase.moduleInitializer.onTick();
-        for (EntityPlayer player : PrestigeBase.mc.world.playerEntities) {
-            if (player == null || player.getHealth() > 0.0f)
-                continue;
-
-            MinecraftForge.EVENT_BUS.post(new DeathEvent(player));
-        }
+        if (PrestigeBase.mc.world == null || PrestigeBase.mc.player == null)
+            return;
+        PrestigeBase.mc.world.playerEntities.stream().filter(player -> player != null && !(player.getHealth() > 0.0f)).map(DeathEvent::new).forEach(MinecraftForge.EVENT_BUS::post);
     }
 
     @SubscribeEvent
