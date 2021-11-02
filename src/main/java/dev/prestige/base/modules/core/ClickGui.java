@@ -33,7 +33,7 @@ public class ClickGui extends Module {
 
     @Override
     public void onTick() {
-        if (!(mc.currentScreen instanceof dev.prestige.base.clickgui.ClickGui) && !isEnabled())
+        if (!(mc.currentScreen instanceof dev.prestige.base.clickgui.ClickGui) && isEnabled())
             disableModule();
     }
 

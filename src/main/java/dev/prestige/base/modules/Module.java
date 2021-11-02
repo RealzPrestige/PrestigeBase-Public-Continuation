@@ -1,5 +1,6 @@
 package dev.prestige.base.modules;
 
+import dev.prestige.base.event.events.ModuleToggleEvent;
 import dev.prestige.base.settings.Setting;
 import dev.prestige.base.settings.impl.BooleanSetting;
 import dev.prestige.base.settings.impl.KeySetting;
@@ -43,12 +44,14 @@ public class Module {
         enabled.setValue(true);
         onEnable();
         MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.post(new ModuleToggleEvent.Enable(this));
     }
 
     public void disableModule() {
         enabled.setValue(false);
         onDisable();
         MinecraftForge.EVENT_BUS.unregister(this);
+        MinecraftForge.EVENT_BUS.post(new ModuleToggleEvent.Disable(this));
     }
 
     public void setEnabled(boolean enabled) {
