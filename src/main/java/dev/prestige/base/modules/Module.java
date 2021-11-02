@@ -36,6 +36,9 @@ public class Module {
     public void onTick(){
     }
 
+    public void onWorldRender(){
+    }
+
     public void enableModule() {
         enabled.setValue(true);
         onEnable();

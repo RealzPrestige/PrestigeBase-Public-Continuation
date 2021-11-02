@@ -2,6 +2,7 @@ package dev.prestige.base.event;
 
 import dev.prestige.base.PrestigeBase;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -26,6 +27,11 @@ public class EventListener {
     public void onKey(InputEvent.KeyInputEvent event) {
         if (Keyboard.getEventKeyState())
             PrestigeBase.moduleInitializer.onKey(Keyboard.getEventKey());
+    }
+
+    @SubscribeEvent
+    public void onWorldRender(RenderWorldLastEvent event) {
+        PrestigeBase.moduleInitializer.onWorldRender();
     }
 
 

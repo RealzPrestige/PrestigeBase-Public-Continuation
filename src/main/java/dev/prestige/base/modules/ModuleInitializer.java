@@ -77,6 +77,10 @@ public class ModuleInitializer {
         }
     }
 
+    public void onWorldRender(){
+        moduleList.forEach(Module::onWorldRender);
+    }
+
     public void onKey(int eventKey) {
         if (eventKey == 0 || !Keyboard.getEventKeyState() || PrestigeBase.mc.currentScreen instanceof ClickGui)
             return;
